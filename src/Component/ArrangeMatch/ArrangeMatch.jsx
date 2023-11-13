@@ -31,7 +31,7 @@ const ArrangeMatch = () => {
                 
             })  
             swal("Sign up Successfully!", "You are now a part of our family!", "success");
-            navigate('/scoreEntry')
+            navigate('/toss')
 
         })
         .catch(error=>{

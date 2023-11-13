@@ -20,7 +20,7 @@ const SignIn = () => {
         signInUser(email,password)
         .then(()=>{
             e.target.reset()
-            navigate('/scoreEntry')
+            navigate('/toss')
             swal("Sign in Successful!", "Thanks for coming back!", "success");
            
 
