@@ -8,9 +8,7 @@ const MatchScoreEntry = () => {
   const teamInfo = {team1,setTeam1,team2,setTeam2}
 
   return (
-    // <teamContext.Provider value={teamInfo}>
-    //     <Toss></Toss>
-    // </teamContext.Provider>
+    
     <div></div>
   );
 };

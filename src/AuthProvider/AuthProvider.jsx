@@ -12,7 +12,7 @@ const AuthProvider = ({children}) => {
     const [striker,setStriker] = useState('')
     const [nonStriker,setNonStriker] = useState('')
     const [openningBowler,setOpenningBowler] = useState('')
-   
+    const [battingTeam,setBattingTeam]= useState('')
     const handleName=(name)=>{
         return setDisName(name)
       }
@@ -40,7 +40,7 @@ const AuthProvider = ({children}) => {
         })
         return ()=> unSubs()
     },[])
-    const authInfo = {user,createUser,disName,handleName,updateUser,signInUser,logOut,team1,team2,setTeam1,setTeam2,striker,setStriker,nonStriker,setNonStriker,openningBowler,setOpenningBowler}
+    const authInfo = {user,createUser,disName,handleName,updateUser,signInUser,logOut,team1,team2,setTeam1,setTeam2,striker,setStriker,nonStriker,setNonStriker,openningBowler,setOpenningBowler,battingTeam,setBattingTeam}
     return (
         <authContex.Provider value={authInfo}>
             {children}

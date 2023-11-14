@@ -1,16 +1,19 @@
 
 import { useContext, useState } from "react";
 import Navbar from "../../Navbar/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authContex } from "../../../AuthProvider/AuthProvider";
+import axios from 'axios';
 
 const Toss = () => {
     const [tossWonBy, setTossWonBy] = useState(null);
     const [optedTo, setOptedTo] = useState("");
-    const {team1,setTeam1,team2,setTeam2} = useContext(authContex)
-   
+    // const [battingTeam,setBattingTeam]= useState('')
+    const {team1,setTeam1,team2,setTeam2,battingTeam,setBattingTeam} = useContext(authContex)
+   const navigate = useNavigate()
     // const [team1, setTeam1] = useState("");
     // const [team2, setTeam2] = useState("");
+
 
     const handlePreMatch = (e) => {
         e.preventDefault();
@@ -18,6 +21,25 @@ const Toss = () => {
         console.log("Team 2:", team2);
         console.log("Toss Won By:", tossWonBy);
         console.log("Opted To:", optedTo);
+        console.log(battingTeam);
+        const matchTossInfo = {team1,team2,tossWonBy,optedTo}
+        if(tossWonBy === team1 && optedTo === 'Bat'){
+            setBattingTeam(team1)
+        }
+        else if(tossWonBy === team2 && optedTo === 'Bat'){
+            setBattingTeam(team2)
+        }
+        else if(tossWonBy === team1 && optedTo === 'Bowl'){
+            setBattingTeam(team2)
+        }
+        else if(tossWonBy === team2 && optedTo==='Bowl'){
+            setBattingTeam(team1)
+        }
+        console.log(battingTeam);
+        axios.post(`http://localhost:5000/create-collection/${battingTeam}`,battingTeam).then(res=>{
+          console.log(res.data);  
+           navigate('/opener')
+        })
     };
 
     return (
@@ -107,9 +129,9 @@ const Toss = () => {
 
                     </div>
                     <div className="text-center">
-                        <Link to='/opener'>
+                       
                             <input type="submit" value='Start Match' className="border-2 p-2 font-medium rounded-md text-white bg-red-500" />
-                        </Link>
+                        
                     </div>
                 </form>
             </div>
